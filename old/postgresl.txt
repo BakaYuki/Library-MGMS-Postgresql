@@ -1,0 +1,21 @@
+create table admin(
+	admin_id varchar(10),
+	username varchar(50) not null,
+	password varchar(50) not null,
+	Primary Key (admin_id)
+);
+
+create table student(
+	student_id serial primary key,
+	name varchar(50),
+	email varchar(50)
+)
+
+create table books(
+	book_id serial primary key,
+	title varchar(50) not null,
+	author varchar(50),
+	genre varchar(50),
+	stock int default 0,
+	available boolean default true
+)

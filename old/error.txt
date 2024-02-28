@@ -1,0 +1,20 @@
+"""def issue_book():
+    st.subheader("Issue Book")
+    book_name = st.text_input("Enter the name of the book you want to search for:")
+    if st.button("Search"):
+        # Search for books based on the entered query
+        try:
+            cur.execute(
+                "SELECT title, author FROM books WHERE title LIKE %s",
+                ('%' + book_name + '%',)
+            )
+            books = cur.fetchall()
+            if books:
+                st.write("Matching Books:")
+                for book in books:
+                    st.write(f"Title: {book[0]}, Author: {book[1]}")
+            else:
+                st.write("No matching books found.")
+        except psycopg2.Error as e:
+            st.error(f"Error searching for books: {e}")
+"""
