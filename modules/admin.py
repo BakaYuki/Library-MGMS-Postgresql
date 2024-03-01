@@ -7,13 +7,15 @@ def admin_login():
     if st.button("Login"):
         if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
             st.success("Login Successful!")
+            st.empty()
             st.session_state.admin_logged_in = True
+            admin_panel()
         else:
             st.error("Invalid username or password. Please try again.")
 
 
 def admin_panel():
-    # admin_login()
+    
     if st.session_state.get('admin_logged_in', True):
         st.title("Admin Panel")
         admin_option = st.sidebar.selectbox("Choose Option", ["Add Book", "Update Book", "Add Student", "Log Out"])
@@ -32,3 +34,5 @@ def admin_panel():
         elif admin_option == "Log Out":
             st.success("Log Out Successful!")  
             st.session_state.admin_logged_in = False
+    else:
+        admin_login()

@@ -7,9 +7,11 @@ from student import *
 def main():
     st.title("Library Management System")
     #User Selection
-    
     user_type = st.sidebar.selectbox("Select User Type", ["User", "Admin"])
-
+    # user_type = "Admin"
+    
+    # st.write(user_type)
+    
     #Student Panel
     if user_type == "User":
         student_panel()
@@ -18,8 +20,9 @@ def main():
     elif user_type == "Admin":
         if 'admin_logged_in' not in st.session_state:
             st.session_state.admin_logged_in = False
-        admin_login()
-    admin_panel()
+            admin_login()
+        else:
+            admin_panel()
 
 if __name__ == "__main__":
     main()
