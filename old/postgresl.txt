@@ -16,6 +16,5 @@ create table books(
 	title varchar(50) not null,
 	author varchar(50),
 	genre varchar(50),
-	stock int default 0,
 	available boolean default true
 )

@@ -6,12 +6,12 @@ def add_book():
     title = st.text_input("Title")
     author = st.text_input("Author")
     genre = st.text_input("Genre")
-
+    # book_id = st.text_input("Book ID")
     if st.button("Add"):
         # Insert the book information into the database
         try:
             cur.execute(
-                "INSERT INTO books (title, author, genre) VALUES (%s, %s, %s)",
+                "INSERT INTO books (title, author, genre, book_id) VALUES (%s, %s, %s",
                 (title, author, genre)
             )
             conn.commit()
