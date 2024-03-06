@@ -1,17 +1,7 @@
 from dbconnection import *
 
 def issue_book(): 
-    #box color for selecting
-    st.markdown(
-        """
-        <style>
-            button:hover {
-                background-color: white;
-            }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+    
     st.subheader("Issue Book")
     book_name = st.text_input("Enter the name of the book you want to search for:")
     if st.button("Search"):
