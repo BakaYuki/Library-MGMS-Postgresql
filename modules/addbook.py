@@ -11,7 +11,7 @@ def add_book():
         # Insert the book information into the database
         try:
             cur.execute(
-                "INSERT INTO books (title, author, genre, book_id) VALUES (%s, %s, %s",
+                "INSERT INTO books (title, author, genre) VALUES (%s, %s, %s)",
                 (title, author, genre)
             )
             conn.commit()
