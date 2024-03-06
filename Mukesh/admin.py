@@ -28,7 +28,7 @@ def admin_panel():
 
         elif admin_option == "Update Book":
             update_book()
-            # update_book()  # You need to implement this function
+            
             st.write("Update book functionality goes here")  
             
         elif admin_option == "Add Student":

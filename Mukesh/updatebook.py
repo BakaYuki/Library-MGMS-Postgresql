@@ -1,19 +1,34 @@
 from dbconnection import *
 
 def update_book():
-    st.subheader("Update Book")
+    st.subheader("Update Book \n heaare")
     book_id = st.text_input("Book ID")
 
-    
-    if st.button("Update Book"):
+    #Checking if the book exists
+    if st.button("Search Book ID"):
         try:
             cur.execute("SELECT * FROM books WHERE book_id = %s", (book_id))
             book = cur.fetchone()
             if book:
-                st.write("Matching Book:")
+                st.write("Matching Book:  ")
                 book_id, name, author, genre, availability = book
-                st.write(f"ID: {book_id}, Name: {name}, Author: {author}, Genre: {genre}, Availability: {availability}")
+                st.write(f"ID: {book_id}   \nName: {name}  \nnAuthor: {author}  \nGenre: {genre}  \nAvailability: {availability}")
                 # Show option to change name, author, genre, availability
+                new_name = st.text_input("New Name")
+                new_author = st.text_input("New Author")
+                new_genre = st.text_input("New Genre")
+                new_availability = st.text_input("New Availability (True or False)")
+                if st.button("Update"):
+                    try:
+                        cur.execute(
+                            "UPDATE books SET name = %s, author = %s, genre = %s, availability = %s WHERE book_id = %s",
+                            (new_name or name, new_author or author, new_genre or genre, new_availability or availability, book_id)
+                        )
+                        conn.commit()
+                        st.success("Book updated successfully!")
+                    except psycopg2.Error as e:
+                        conn.rollback()
+                        st.error(f"Error updating book: {e}")
             else:
                 st.write("No matching book found.")
         
@@ -22,10 +37,7 @@ def update_book():
             st.error(f"Error searching for books id: {e}")
             
             
-    book_name = st.text_input("Book Name")
-    book_author = st.text_input("Book Author")
-    book_genre = st.text_input("Book Genre")
-    book_availability = st.text_input("Book Availability True or False")    
+ 
         # try:
         #     cur.execute(
         #         "UPDATE books SET name = %s, author = %s WHERE book_id = %s",
