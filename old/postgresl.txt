@@ -9,7 +9,7 @@ create table student(
 	student_id serial primary key,
 	name varchar(50),
 	email varchar(50)
-)
+);
 
 create table books(
 	book_id serial primary key,
