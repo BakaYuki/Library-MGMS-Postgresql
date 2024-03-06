@@ -22,7 +22,10 @@ def main():
         """
         <style> 
             h2 {
-                color: #3498db;
+                color:  #00ffff;
+            }
+            h3 {
+                color:  #3498db;
             }
         </style>
         """,
