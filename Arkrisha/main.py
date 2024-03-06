@@ -17,7 +17,17 @@ def main():
     # User Selection
     user_type = st.sidebar.selectbox("Select User Type", ["User", "Admin"])
 
-   
+   # Custom styling header
+    st.markdown(
+        """
+        <style> 
+            h2 {
+                color: #3498db;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
     # Display a welcome message based on the user type
     if user_type == "User":
         st.success("Welcome, User! Explore our collection and borrow books.")
