@@ -2,55 +2,46 @@ from dbconnection import *
 
 def update_book():
     st.subheader("Update Book")
-    book_id = st.text_input("Book ID")
-    new_name = str()
-    new_author = str()
-    new_genre = str()
-    new_availability = str()
-    #Checking if the book exists
-    if st.button("Search Book ID"):
-        # status = 1
-        # try:
-        cur.execute("SELECT * FROM books WHERE book_id = %s", (book_id))
+    #Session State hold the book_id entered by the user even after page refresh
+    st.session_state.book_id = st.text_input("Enter the Book ID:")
+    book_id = st.session_state.book_id
+    
+    # Initialize Button Clicked state to False during starting
+    if 'button_clicked' not in st.session_state:
+        st.session_state.button_clicked = False
+    
+    #Session State to True when button is clicked so that the book information can be displayed and updated
+    if st.button("Show Book"):
+        st.session_state.button_clicked = True
+    
+    # If the button is clicked, retrieve the book information from the database
+    if st.session_state.button_clicked:  
+        # Retrieve book information from the database
+        cur.execute("SELECT * FROM books WHERE book_id = %s", (book_id,))
         book = cur.fetchone()
+        
+        #Display the book information in the form
         if book:
-            st.write("Matching Book:  ")
-            book_id, name, author, genre, availability = book
-            st.write(f"ID: {book_id}   \nName: {name}  \nnAuthor: {author}  \nGenre: {genre}  \nAvailability: {availability}")
-            # Show option to change name, author, genre, availability
-            new_name = st.text_input("New Name")
-            new_author = st.text_input("New Author")
-            new_genre = st.text_input("New Genre")
-            new_availability = st.text_input("New Availability (True or False)")
+            book_id, title, author, genre, availability = book
+            #Book ID displayed only and cannot be changed
+            st.write(f"Book ID: {book_id}")
+            #value = shows the current information from the database
+            title = st.text_input("Title", value=title) 
+            author = st.text_input("Author", value=author)
+            genre = st.text_input("Genre", value=genre)
+            availability=  st.text_input("Availability", value=availability)
             if st.button("Update"):
-                st.write("Updating book")
+                # Update the book information in the database
                 try:
                     cur.execute(
-                        "UPDATE books SET name = %s, author = %s, genre = %s, availability = %s WHERE book_id = %s",
-                        (new_name or name, new_author or author, new_genre or genre, new_availability or availability, book_id)
+                        "UPDATE books SET title = %s, author = %s, genre = %s WHERE book_id = %s",
+                        (title, author, genre, book_id)
                     )
                     conn.commit()
                     st.success("Book updated successfully!")
                 except psycopg2.Error as e:
                     conn.rollback()
                     st.error(f"Error updating book: {e}")
-                else:
-                    st.write("No matching book found.")
-        
-        # except psycopg2.Error as e:
-        #     conn.rollback()
-            # st.error(f"Error searching for books id: {e}")
-    # while(status == 1):
-    
+        else:
+            st.error("No such book found")
             
- 
-        # try:
-        #     cur.execute(
-        #         "UPDATE books SET name = %s, author = %s WHERE book_id = %s",
-        #         (book_name, book_author,book_id)
-        #     )
-        #     conn.commit()
-        #     st.success("Book updated successfully!")
-        # except psycopg2.Error as e:
-        #     conn.rollback()
-        #     st.error(f"Error updating book: {e}")
