@@ -18,3 +18,12 @@ create table books(
 	genre varchar(50),
 	available boolean default true
 )
+
+CREATE TABLE issued (
+    issue_id serial PRIMARY KEY,
+    student_id integer REFERENCES student(student_id),
+    book_id integer REFERENCES books(book_id),
+    issue_date date DEFAULT CURRENT_DATE
+);
+
+insert into student values (1,"Mukesh","mukeshpr43@gmail.com")
