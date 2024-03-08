@@ -1,8 +1,10 @@
 from dbconnection import *
 from addbook import *
+from addstudent import *
+from updatebook import *
+
 def admin_login():
     st.subheader("Admin Login")
-    # st.write("Please login first")
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     if st.button("Login"):
@@ -25,12 +27,14 @@ def admin_panel():
             add_book()
 
         elif admin_option == "Update Book":
-            # update_book()  # You need to implement this function
-            st.write("Update book functionality goes here")  # You need to implement this function
-
+            update_book()
+            
+            # st.write("Update book functionality goes here")  
+            
         elif admin_option == "Add Student":
-            # add_student()  # You need to implement this function
-            st.write("Add student functionality goes here")  # You need to implement this function
+            add_student()  # add student functionality
+
+            # st.write("Add student functionality goes here")  
 
         elif admin_option == "Log Out":
             st.success("Log Out Successful!")  
