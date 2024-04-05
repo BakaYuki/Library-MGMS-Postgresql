@@ -48,7 +48,7 @@ def admin_panel():
          
 
         elif admin_option == "Log Out":
-            st.success("Log Out Successful!")  
             st.session_state.admin_logged_in = False
+            st.success("Log Out Successful!")  
     else:
         login()
