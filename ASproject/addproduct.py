@@ -34,8 +34,9 @@ def add_product():
 
 # Function to retrieve all products from the database
 def view_products():
+    user_id =  st.session_state.user[0]
     try :
-        cur.execute("SELECT * FROM products")
+        cur.execute("SELECT * FROM products WHERE user_id = %s",(user_id,))
         product_list = cur.fetchall()
         # Display products in a table
         table_data = [("ID", "Product Name", "Price", "Quantity")]

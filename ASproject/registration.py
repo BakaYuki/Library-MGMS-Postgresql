@@ -38,8 +38,8 @@ def create_user_table(conn):
             password VARCHAR(255) NOT NULL
         )
     """)
-    conn.commit()
-'''
+    conn.commit()'''
+
 # Function to register a new user
 def register_user(conn, username, password):
     hashed_password = hashlib.sha256(password.encode()).hexdigest()

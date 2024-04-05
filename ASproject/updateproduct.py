@@ -20,21 +20,20 @@ def update_product():
         cur.execute("SELECT * FROM products WHERE product_id = %s", (product_id,))
         product = cur.fetchone()
         
-        #Display the book information in the form
+        #Display the product information in the form
         if product:
-            product_id, name, price, stock_quantity, availability = product
-            #Book ID displayed only and cannot be changed
+            product_id, name, price, stock_quantity
+            #Product ID displayed only and cannot be changed
             st.write(f"Product ID: {product_id}")
             #value = shows the current information from the database
-            name = st.text_input("Pradoct Name", value=name) 
+            name = st.text_input("Product Name", value=name) 
             price = st.text_input("Price", value=price)
             stock_quantity = st.text_input("Quantity", value=stock_quantity)
-            availability=  st.text_input("Availability", value=availability)
             if st.button("Update"):
-                # Update the book information in the database
+                # Update the product information in the database
                 try:
                     cur.execute(
-                        "UPDATE books SET name = %s, price = %s, stock_quantity = %s WHERE product_id = %s",
+                        "UPDATE products SET name = %s, price = %s, stock_quantity = %s WHERE product_id = %s",
                         (name, price, stock_quantity, product_id)
                     )
                     conn.commit()
