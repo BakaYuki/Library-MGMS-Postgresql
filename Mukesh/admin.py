@@ -34,7 +34,6 @@ def admin_panel():
         elif admin_option == "Add Student":
             add_student()  # add student functionality
 
-            # st.write("Add student functionality goes here")  
 
         elif admin_option == "Log Out":
             st.success("Log Out Successful!")  
