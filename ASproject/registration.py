@@ -29,16 +29,7 @@ def get_user_by_username(username):
     cur.execute("SELECT * FROM users WHERE username = %s", (username,))
     user = cur.fetchone()
     return user
-'''# Function to create a table for users if it doesn't exist
-def create_user_table(conn):
-    cur.execute("""
-           CREATE TABLE IF NOT EXISTS users (
-            id SERIAL PRIMARY KEY,
-            username VARCHAR(255) NOT NULL UNIQUE,
-            password VARCHAR(255) NOT NULL
-        )
-    """)
-    conn.commit()'''
+
 
 # Function to register a new user
 def register_user(conn, username, password):
