@@ -34,10 +34,16 @@ def add_product():
 
 # Function to retrieve all products from the database
 def view_products():
-    cur.execute("SELECT * FROM products")
-    product_list = cur.fetchall
-    for products in product_list:
-        st.write(products[0],products[1])
+    try :
+        cur.execute("SELECT * FROM products")
+        product_list = cur.fetchall()
+        # Display products in a table
+        table_data = [("ID", "Product Name", "Price", "Quantity")]
+        for product in product_list:
+            table_data.append((product[0], product[1], product[2], product[3]))
+        st.table(table_data)
 
+    except psycopg2.Error as e:
+        st.error(f"Error searching for product: {e}")
 
 
