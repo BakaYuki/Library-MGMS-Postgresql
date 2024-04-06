@@ -15,5 +15,5 @@ to create a table for products
             price DECIMAL NOT NULL,
             stock_quantity INTEGER NOT NULL,
             user_id SERIAL,
-            foreign key (user_id) referencs users
+            foreign key (user_id) references users
         )

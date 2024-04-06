@@ -14,10 +14,10 @@ def update_product():
     if st.button("Update Product Detail"):
         st.session_state.button_clicked = True
         
-    # Initialize variables to prevent UnboundLocalError
-    name = None
-    price = None
-    stock_quantity = None
+    # # Initialize variables to prevent UnboundLocalError
+    # name = None
+    # price = None
+    # stock_quantity = None
     
     # If the button is clicked, retrieve the product information from the database
     if st.session_state.button_clicked: 
@@ -31,7 +31,11 @@ def update_product():
             
             #Display the product information in the form
             if product:
-                product_id, name, price, stock_quantity
+                # product_id, name, price, stock_quantity
+                product_id = product[0]
+                name = product[1]
+                price = product[2]
+                stock_quantity = product[3]
                 #Product ID displayed only and cannot be changed
                 st.write(f"Product ID: {product_id}")
                 #value = shows the current information from the database
