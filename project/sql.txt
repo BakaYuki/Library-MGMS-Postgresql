@@ -1,0 +1,23 @@
+def create_user_table():
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute('''CREATE TABLE IF NOT EXISTS users
+                (id SERIAL PRIMARY KEY,
+                username TEXT NOT NULL,
+                password TEXT NOT NULL)''')
+    conn.commit()
+    conn.close()
+
+# Function to create password table if not exists
+def create_password_table():
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute('''CREATE TABLE IF NOT EXISTS passwords
+                (id SERIAL PRIMARY KEY,
+                user_id INT NOT NULL,
+                website TEXT NOT NULL,
+                username TEXT NOT NULL,
+                password TEXT NOT NULL,
+                FOREIGN KEY (user_id) REFERENCES users(id))''')
+    conn.commit()
+    conn.close()
