@@ -7,8 +7,8 @@ def student_panel():
     
     #Yo hataunu parxa.........
     if student_option == "Issue Book":
-        if 'userr' not in st.session_state:
-            st.write("Please login first")
+        # if 'userr' not in st.session_state:
+        #     st.write("Please login first")
         issue_book()
         
     elif student_option == "Return Book":
