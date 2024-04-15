@@ -1,6 +1,5 @@
 from dbconnection import *
 
-page2_url = "page2"
 def issue_book(): 
     
     st.subheader("Issue Book")
