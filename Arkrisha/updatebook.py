@@ -23,6 +23,7 @@ def update_book():
         #Display the book information in the form
         if book:
             book_id, title, author, genre, availability = book
+            
             #Book ID displayed only and cannot be changed
             st.write(f"Book ID: {book_id}")
             #value = shows the current information from the database
