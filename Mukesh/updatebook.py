@@ -17,18 +17,14 @@ def update_book():
     # If the button is clicked, retrieve the book information from the database
     if st.session_state.button_clicked == True:  
         # Retrieve book information from the database
-        book_id = int(book_id)
+        # book_id = int(book_id)
         cur.execute("SELECT * FROM books WHERE book_id = %s", (book_id,))
         book = cur.fetchone()
         
         #Display the book information in the form
         if book:
-            # book_id, title, author, genre, availability = book
-            book_id = book[0]
-            title = book[1]
-            author = book[2]
-            genre = book[3]
-            availability = book[4]
+            book_id, title, author, genre, availability = book
+
             #Book ID displayed only and cannot be changed
             st.write(f"Book ID: {book_id}")
             #value = shows the current information from the database
