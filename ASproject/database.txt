@@ -14,6 +14,7 @@ to create a table for products
             name VARCHAR(255) NOT NULL,
             price DECIMAL NOT NULL,
             stock_quantity INTEGER NOT NULL,
+            categories VARCHAR(255),
             user_id SERIAL,
             foreign key (user_id) references users
         )
