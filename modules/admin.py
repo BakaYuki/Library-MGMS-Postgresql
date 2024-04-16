@@ -7,8 +7,20 @@ def admin_login():
     st.subheader("Admin Login")
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
+
     if st.button("Login"):
-        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+        student_id = '7803211'
+        try:
+
+            cur.execute("SELECT * FROM admin WHERE username = %s", (username,))
+            admin_password_check = cur.fetchone()
+            # print(admin_password_check)
+            # st.write(admin_password_check[2])
+            
+        except psycopg2.Error as e:
+            st.error(f"Error retrieving admin details: {e}")
+            
+        if password == admin_password_check[2]:
             st.success("Login Successful!")
             st.empty()
             st.session_state.admin_logged_in = True

@@ -9,4 +9,3 @@ def student_panel():
         
     elif student_option == "Return Book":
         return_book()
-        # st.write("Return book functionality goes here")
