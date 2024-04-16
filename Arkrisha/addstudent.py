@@ -17,3 +17,16 @@ def add_student():
         except psycopg2.Error as e:
             conn.rollback()
             st.error(f"Error adding student: {e}")
+            
+def view_student():
+    try :
+        cur.execute("SELECT * FROM student ")
+        student_list = cur.fetchall()
+        # Display students in a table
+        table_data = [("ID", "Name", "Email")]
+        for student in student_list:
+            table_data.append((student[0], student[1], student[2]))
+        st.table(table_data)
+
+    except psycopg2.Error as e:
+        st.error(f"Error searching for product: {e}")    
