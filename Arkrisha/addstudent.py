@@ -17,6 +17,19 @@ def add_student():
         except psycopg2.Error as e:
             conn.rollback()
             st.error(f"Error adding student: {e}")
+    delete_checked = st.checkbox("Delete Student")
+    try:
+        if delete_checked:
+            confirm_delete = st.button("Confirm Delete")
+            if confirm_delete:
+                # Delete the student from the database
+                cur.execute("DELETE FROM student WHERE student_id = %s", (student_id,))
+                conn.commit()
+                st.success("Student details deleted successfully!")  
+    except psycopg2.Error:
+        conn.rollback()
+        st.error("Student has books issued.")          
+           
             
 def view_student():
     try :
