@@ -9,16 +9,15 @@ def admin_login():
     password = st.text_input("Password", type="password")
 
     if st.button("Login"):
-        student_id = '7803211'
+        
         try:
-
             cur.execute("SELECT * FROM admin WHERE username = %s", (username,))
             admin_password_check = cur.fetchone()
             # print(admin_password_check)
             # st.write(admin_password_check[2])
             
         except psycopg2.Error as e:
-            st.error(f"Error retrieving admin details: {e}")
+            st.error("Invalid username or password. Please try again.")
             
         if password == admin_password_check[2]:
             st.success("Login Successful!")
@@ -41,7 +40,6 @@ def admin_panel():
         elif admin_option == "Update Book":
             update_book()
             
-            # st.write("Update book functionality goes here")  
             
         elif admin_option == "Add Student":
             add_student()  # add student functionality
