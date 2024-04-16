@@ -15,7 +15,7 @@ def update_book():
         st.session_state.button_clicked = True
     
     # If the button is clicked, retrieve the book information from the database
-    if st.session_state.button_clicked:  
+    if st.session_state.button_clicked == True:  
         # Retrieve book information from the database
         cur.execute("SELECT * FROM books WHERE book_id = %s", (book_id,))
         book = cur.fetchone()
@@ -54,4 +54,4 @@ def update_book():
                     st.success("book deleted successfully!")            
         else:
             st.error("No such book found")
-            
+    st.session_state.button_clicked = False        
