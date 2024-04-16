@@ -23,6 +23,7 @@ def update_book():
         #Display the book information in the form
         if book:
             book_id, title, author, genre, availability = book
+            
             #Book ID displayed only and cannot be changed
             st.write(f"Book ID: {book_id}")
             #value = shows the current information from the database
@@ -42,6 +43,15 @@ def update_book():
                 except psycopg2.Error as e:
                     conn.rollback()
                     st.error(f"Error updating book: {e}")
+        # Add a delete button
+            delete_checked = st.checkbox("Delete Book")
+            if delete_checked:
+                confirm_delete = st.button("Confirm Delete")
+                if confirm_delete:
+                    # Delete the book from the database
+                    cur.execute("DELETE FROM books WHERE book_id = %s", (book_id,))
+                    conn.commit()
+                    st.success("book deleted successfully!")            
         else:
             st.error("No such book found")
             

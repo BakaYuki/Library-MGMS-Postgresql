@@ -5,14 +5,14 @@ from issuebook import *
 from student import *
 
 def main():
-
+    
     # Adding a header
     st.header("Welcome to Library Management System 📖")
-
-    # User Selection
+    #User Selection
     user_type = st.sidebar.selectbox("Select User Type", ["User", "Admin"])
-
-   # Custom styling header
+    # user_type = "Admin"
+    
+    # Custom styling header
     st.markdown(
         """
         <style> 
@@ -31,10 +31,6 @@ def main():
         st.success("Welcome, User! Explore our collection and borrow books.")
     else:
         st.success("Welcome, Admin! Manage the library and books.")
-
-
-    # st.write(user_type)
-    
     #Student Panel
     if user_type == "User":
         student_panel()

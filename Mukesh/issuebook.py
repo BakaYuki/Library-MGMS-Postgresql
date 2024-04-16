@@ -1,10 +1,12 @@
 from dbconnection import *
 
 def issue_book(): 
-    
+    if 'issue_condition' not in st.session_state:
+        st.session_state.issue_condition = False
     st.subheader("Issue Book")
     book_name = st.text_input("Enter the name of the book you want to search for:")
     if st.button("Search"):
+        st.session_state.issue_condition = False
         try:
             cur.execute(
                 "SELECT book_id, title, author FROM books WHERE title ILIKE %s",
@@ -22,9 +24,13 @@ def issue_book():
         except psycopg2.Error as e:
             st.error(f"Error searching for books: {e}")
     issue_book_no = st.text_input("Enter the book id here to issue: ")
+    st.session_state.book_no = issue_book_no
     if st.button("Issue"):
+        st.session_state.issue_condition = True
+    
+    if st.session_state.issue_condition == True:
         try:
-            cur.execute("SELECT * FROM books WHERE book_id = %s", (issue_book_no,))
+            cur.execute("SELECT * FROM books WHERE book_id = %s", (st.session_state.book_no,))
             book_id_check = cur.fetchone()
             if book_id_check:
                 student_id = st.text_input("Enter your Student ID:") 
@@ -34,13 +40,15 @@ def issue_book():
                         cur.execute("SELECT * FROM student WHERE student_id = %s", (student_id,))
                         student = cur.fetchone()       
                         if student:
+                            issue_date = date.today()
                             # Issue the book
                             cur.execute(
-                                "INSERT INTO issued (student_id, book_id, issue_date) VALUES (%s, %s, CURRENT_DATE)",
-                                (student_id, book_id)
+                                "INSERT INTO issued (student_id, book_id, issue_date) VALUES (%s, %s, %s)",
+                                (student_id, st.session_state.book_no,issue_date,)
                             )
                             conn.commit()
                             st.success("Book issued successfully!")
+                            st.session_state.issue_condition = False
                             
                         else:
                             st.error("Invalid Student ID. Please enter a valid ID.")
@@ -53,11 +61,6 @@ def issue_book():
         except psycopg2.Error as e:            
             st.error(f"Error searching for books id: {e}")
         
-            
-            
-            
-            
-            
             
             
 # Trials            
