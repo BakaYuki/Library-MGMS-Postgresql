@@ -32,7 +32,7 @@ def admin_panel():
     
     if st.session_state.get('admin_logged_in', True):
         st.title("Admin Panel")
-        admin_option = st.sidebar.selectbox("Choose Option", ["Add Book", "Update Book", "Add Student", "View Book", "Log Out"])
+        admin_option = st.sidebar.selectbox("Choose Option", ["Add Book", "Update Book", "Add Student", "View Books and Students", "Log Out"])
         
         if admin_option == "Add Book": # Adding book functionality
             add_book()
@@ -44,8 +44,11 @@ def admin_panel():
         elif admin_option == "Add Student":
             add_student()  # add student functionality
             
-        elif admin_option == "View Book":
+        elif admin_option == "View Books and Students":
+            st.write("BOOKS")
             view_book()
+            st.write("STUDENTS")
+            view_student()
 
 
         elif admin_option == "Log Out":
