@@ -30,7 +30,7 @@ def update_book():
             title = st.text_input("Title", value=title) 
             author = st.text_input("Author", value=author)
             genre = st.text_input("Genre", value=genre)
-            availability=  st.text_input("Availability", value=availability)
+            # availability=  st.text_input("Availability", value=availability)
             if st.button("Update"):
                 # Update the book information in the database
                 try:
